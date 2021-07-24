@@ -1,0 +1,16 @@
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\bin\Debug\net5.0\Luxoft Code Challenge.exe
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\bin\Debug\net5.0\Luxoft Code Challenge.deps.json
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\bin\Debug\net5.0\Luxoft Code Challenge.runtimeconfig.json
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\bin\Debug\net5.0\Luxoft Code Challenge.runtimeconfig.dev.json
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\bin\Debug\net5.0\Luxoft Code Challenge.dll
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\bin\Debug\net5.0\ref\Luxoft Code Challenge.dll
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\bin\Debug\net5.0\Luxoft Code Challenge.pdb
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\Luxoft Code Challenge.csproj.AssemblyReference.cache
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\Luxoft Code Challenge.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\Luxoft Code Challenge.AssemblyInfoInputs.cache
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\Luxoft Code Challenge.AssemblyInfo.cs
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\Luxoft Code Challenge.csproj.CoreCompileInputs.cache
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\Luxoft Code Challenge.dll
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\ref\Luxoft Code Challenge.dll
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\Luxoft Code Challenge.pdb
+C:\Users\Fer\source\repos\Luxoft Code Challenge\Luxoft Code Challenge\obj\Debug\net5.0\Luxoft Code Challenge.genruntimeconfig.cache
