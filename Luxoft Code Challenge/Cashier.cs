@@ -19,13 +19,13 @@ namespace LuxoftCodeChallenge
         //in the same page, go to Environment Variables, in 'Name' you will input the currency
         //and in 'Value' you will input the currency denomination like so:
         //0.01,0.05,0.10,0.25,0.50,1.00,2.00,5.00,10.00,20.00,50.00,100.00
-        public decimal[] CurrencyDenomination { get; set; }
-        public int DenominationCount { get; set; }
-        public string CountryCurrency { get; set; }
+        private readonly decimal[] CurrencyDenomination;
+        private readonly int DenominationCount;
+        private readonly string CountryCurrency;
 
         public Cashier()
         {
-
+           
         }
 
         public Cashier(string currency)
@@ -35,12 +35,21 @@ namespace LuxoftCodeChallenge
             var envvar = Environment.GetEnvironmentVariable(CountryCurrency);
 
             //Converting the Environment Variable string into a string array.
-            string[] Denominations = envvar.Split(",");
+            string[] denominations = envvar.Split(",");
 
             //Converts the string array for the Denominations into a Decimal Array so it can be used and compared with future values
-            if (Denominations.All(iterator => Decimal.TryParse(iterator, out decimal BillOrCoin)))
-                CurrencyDenomination = Array.ConvertAll<string, decimal>(Denominations, Convert.ToDecimal);
+            if (denominations.All(iterator => Decimal.TryParse(iterator, out decimal billOrCoin)))
+                CurrencyDenomination = Array.ConvertAll<string, decimal>(denominations, Convert.ToDecimal);
 
+            //Sets the amount of bills/coins that can be used.
+            DenominationCount = CurrencyDenomination.Length;
+        }
+
+        public Cashier(string currency, decimal[] currencyDenomination)
+            :this(currency)
+        {
+            //Assigns the currencyDenomination array
+            CurrencyDenomination = currencyDenomination;
             //Sets the amount of bills/coins that can be used.
             DenominationCount = CurrencyDenomination.Length;
         }
@@ -59,7 +68,7 @@ namespace LuxoftCodeChallenge
                 //Gets the Amount the client is paying with.
                 decimal clientsMoney = GetClientsMoney(totalPrice);
 
-                List<decimal> ChangeToReturn = null;
+                List<decimal> changeToReturn = null;
 
                 Console.WriteLine("\nThe total amount is: $" + totalPrice);
                 Console.WriteLine("The received amount is: $" + clientsMoney);
@@ -71,9 +80,9 @@ namespace LuxoftCodeChallenge
                     //Total change that needs to be returned to the client.
                     decimal change = clientsMoney - totalPrice;
                     //Calculates how many bills and coins of each denomination needs to be returned to the client.
-                    ChangeToReturn = GetChange(change);
+                    changeToReturn = GetChange(change);
 
-                    Console.WriteLine("Change for the client: $" + string.Join(", $", ChangeToReturn.Select(x => x.ToString())));
+                    Console.WriteLine("Change for the client: $" + string.Join(", $", changeToReturn.Select(x => x.ToString())));
                 }
                 else
                 {
@@ -85,7 +94,6 @@ namespace LuxoftCodeChallenge
                 bool SecondFlag = true;
 
                 ShopAgain(ref flag, ref SecondFlag);
-
             }
         }
 
