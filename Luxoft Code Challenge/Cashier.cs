@@ -33,6 +33,11 @@ namespace LuxoftCodeChallenge
             get { return _currencyDenomination; }
         }
 
+        public int DenominationCount
+        {
+            get { return _denominationCount; }
+        }
+
         public Cashier()
         {
            
@@ -113,7 +118,7 @@ namespace LuxoftCodeChallenge
         /// <param name="phase">There are two phases, the first where the total amount to be paid is entered and the one where the user is entering their cash.
         /// when the users cash is being entered, phase should be false.</param>
         /// <returns>A non negative decimal type value</returns>
-        public decimal IsValidNumber(bool phase = true)
+        public static decimal IsValidNumber(bool phase = true)
         {
             decimal validNumber = 0.0M;
 
@@ -147,7 +152,7 @@ namespace LuxoftCodeChallenge
         /// This method will ask the customer for the total of the items he wants to purchase.
         /// </summary>
         /// <returns>A decimal type value representing the total amount the client needs to pay.</returns>
-        public decimal GetTotalPrice()
+        public static decimal GetTotalPrice()
         {
             Console.Write("Hello, please input the price of the items that you want to purchase: $");
             //Total amount to be paid by the client.
@@ -178,8 +183,8 @@ namespace LuxoftCodeChallenge
                 //for the next bill or coin. 
                 if (isValidAmount)
                 {
-                    Console.WriteLine("\nPlease enter a valid Bill Or Coin in the currency being used. ({0})", _countryCurrency);
-                    Console.WriteLine("$" + string.Join(", $", _currencyDenomination.Select(x => x.ToString())));
+                    Console.WriteLine("\nPlease enter a valid Bill Or Coin in the currency being used. ({0})", CountryCurrency);
+                    Console.WriteLine("$" + string.Join(", $", CurrencyDenomination.Select(x => x.ToString())));
                     Console.Write("Amount: $");
                 }
                 else
@@ -208,7 +213,7 @@ namespace LuxoftCodeChallenge
 
             //This will check if the input of the user is possible according to
             //the currency denomination. 
-            foreach (var iterator in _currencyDenomination)
+            foreach (var iterator in CurrencyDenomination)
             {
                 if (billsOrCoins == iterator)
                 {
@@ -236,9 +241,9 @@ namespace LuxoftCodeChallenge
             List<decimal> change = new();
 
             //This will loop from the last element of the Currency Denominations to the first.
-            for (int i = _denominationCount - 1; i >= 0; i--)
+            for (int i = DenominationCount - 1; i >= 0; i--)
             {
-                decimal currentDenomination = _currencyDenomination[i];
+                decimal currentDenomination = CurrencyDenomination[i];
 
                 //This will remove the most amount of bills with the highest value.
                 //Once the highest value is higher than the amount to return it will
@@ -259,7 +264,7 @@ namespace LuxoftCodeChallenge
         /// </summary>
         /// <param name="flag">Boolean that controls the process of the whole application. If it is set to false the applicatino will stop.</param>
         /// <param name="secondFlag">Boolean that will not let you go to any other process of the application until you enter a valid input.</param>
-        public void ShopAgain(ref bool flag, ref bool secondFlag)
+        public static void ShopAgain(ref bool flag, ref bool secondFlag)
         {
             while (secondFlag)
             {
@@ -283,14 +288,11 @@ namespace LuxoftCodeChallenge
                             Console.WriteLine("\nPlease input a valid response");
                             Console.WriteLine("Is there a new client? Yes: 1  No: 0");
                         }
-
                     }
-
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
-                    Console.WriteLine("\n" + e.Message);
-                    Console.WriteLine("Please input a valid response");
+                    Console.WriteLine("\nPlease input a valid response");
                     Console.WriteLine("Is there a new client? Yes: 1  No: 0");
                 }
             }
