@@ -19,9 +19,19 @@ namespace LuxoftCodeChallenge
         //in the same page, go to Environment Variables, in 'Name' you will input the currency
         //and in 'Value' you will input the currency denomination like so:
         //0.01,0.05,0.10,0.25,0.50,1.00,2.00,5.00,10.00,20.00,50.00,100.00
-        private readonly decimal[] CurrencyDenomination;
-        private readonly int DenominationCount;
-        private readonly string CountryCurrency;
+        private readonly decimal[] _currencyDenomination;
+        private readonly int _denominationCount;
+        private readonly string _countryCurrency;
+
+        public string CountryCurrency
+        {
+            get { return _countryCurrency; }
+        }
+
+        public decimal[] CurrencyDenomination
+        {
+            get { return _currencyDenomination; }
+        }
 
         public Cashier()
         {
@@ -30,28 +40,28 @@ namespace LuxoftCodeChallenge
 
         public Cashier(string currency)
         {
-            CountryCurrency = currency;
+            _countryCurrency = currency;
 
-            var envvar = Environment.GetEnvironmentVariable(CountryCurrency);
+            var envvar = Environment.GetEnvironmentVariable(_countryCurrency);
 
             //Converting the Environment Variable string into a string array.
             string[] denominations = envvar.Split(",");
 
             //Converts the string array for the Denominations into a Decimal Array so it can be used and compared with future values
             if (denominations.All(iterator => Decimal.TryParse(iterator, out decimal billOrCoin)))
-                CurrencyDenomination = Array.ConvertAll<string, decimal>(denominations, Convert.ToDecimal);
+                _currencyDenomination = Array.ConvertAll<string, decimal>(denominations, Convert.ToDecimal);
 
             //Sets the amount of bills/coins that can be used.
-            DenominationCount = CurrencyDenomination.Length;
+            _denominationCount = _currencyDenomination.Length;
         }
 
         public Cashier(string currency, decimal[] currencyDenomination)
             :this(currency)
         {
             //Assigns the currencyDenomination array
-            CurrencyDenomination = currencyDenomination;
+            _currencyDenomination = currencyDenomination;
             //Sets the amount of bills/coins that can be used.
-            DenominationCount = CurrencyDenomination.Length;
+            _denominationCount = _currencyDenomination.Length;
         }
 
         /// <summary>
@@ -168,8 +178,8 @@ namespace LuxoftCodeChallenge
                 //for the next bill or coin. 
                 if (isValidAmount)
                 {
-                    Console.WriteLine("\nPlease enter a valid Bill Or Coin in the currency being used. ({0})", CountryCurrency);
-                    Console.WriteLine("$" + string.Join(", $", CurrencyDenomination.Select(x => x.ToString())));
+                    Console.WriteLine("\nPlease enter a valid Bill Or Coin in the currency being used. ({0})", _countryCurrency);
+                    Console.WriteLine("$" + string.Join(", $", _currencyDenomination.Select(x => x.ToString())));
                     Console.Write("Amount: $");
                 }
                 else
@@ -198,7 +208,7 @@ namespace LuxoftCodeChallenge
 
             //This will check if the input of the user is possible according to
             //the currency denomination. 
-            foreach (var iterator in CurrencyDenomination)
+            foreach (var iterator in _currencyDenomination)
             {
                 if (billsOrCoins == iterator)
                 {
@@ -226,9 +236,9 @@ namespace LuxoftCodeChallenge
             List<decimal> change = new();
 
             //This will loop from the last element of the Currency Denominations to the first.
-            for (int i = DenominationCount - 1; i >= 0; i--)
+            for (int i = _denominationCount - 1; i >= 0; i--)
             {
-                decimal currentDenomination = CurrencyDenomination[i];
+                decimal currentDenomination = _currencyDenomination[i];
 
                 //This will remove the most amount of bills with the highest value.
                 //Once the highest value is higher than the amount to return it will
