@@ -56,8 +56,8 @@ namespace LuxoftCodeChallenge
         }
 
         public Cashier(string currency, decimal[] currencyDenomination)
-            :this(currency)
         {
+            _countryCurrency = currency;
             //Assigns the currencyDenomination array
             _currencyDenomination = currencyDenomination;
             //Sets the amount of bills/coins that can be used.
