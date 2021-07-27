@@ -38,10 +38,10 @@ namespace LuxoftCodeChallenge
             get { return _denominationCount; }
         }
 
-        public Cashier()
-        {
+        //public Cashier()
+        //{
            
-        }
+        //}
 
         public Cashier(string currency)
         {
