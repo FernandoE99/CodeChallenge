@@ -74,9 +74,8 @@ namespace LuxoftCodeChallenge
         /// </summary>
         public void Run()
         {
-            bool flag = true;
             //This will keep the app running until the user decides to stop it after helping a client.
-            while (flag)
+            do
             {
                 //Gets the TotalAmount the user needs to pay.
                 decimal totalPrice = GetTotalPrice();
@@ -104,12 +103,7 @@ namespace LuxoftCodeChallenge
                     //Client paid with exact amount.
                     Console.WriteLine("The change for the client is: $0.00");
                 }
-                Console.WriteLine("Thank you for shopping with us.");
-                Console.WriteLine("\nIs there a new client? Yes: 1  No: 0");
-                bool SecondFlag = true;
-
-                ShopAgain(ref flag, ref SecondFlag);
-            }
+            } while (ShopAgain());
         }
 
         /// <summary>
@@ -118,7 +112,7 @@ namespace LuxoftCodeChallenge
         /// <param name="phase">There are two phases, the first where the total amount to be paid is entered and the one where the user is entering their cash.
         /// when the users cash is being entered, phase should be false.</param>
         /// <returns>A non negative decimal type value</returns>
-        public static decimal IsValidNumber(bool phase = true)
+        public static decimal GetUserTotalInput(bool phase = true)
         {
             decimal validNumber = 0.0M;
 
@@ -156,7 +150,7 @@ namespace LuxoftCodeChallenge
         {
             Console.Write("Hello, please input the price of the items that you want to purchase: $");
             //Total amount to be paid by the client.
-            return IsValidNumber();
+            return GetUserTotalInput();
         }
 
         /// <summary>
@@ -208,7 +202,7 @@ namespace LuxoftCodeChallenge
         /// <returns>A decimal type value which represents a Bill or Coin for the currency being used.</returns>
         public decimal ValidateMoneyInput(ref bool isValidAmount)
         {
-            decimal billsOrCoins = IsValidNumber(false);
+            decimal billsOrCoins = GetUserTotalInput(false);
             decimal clientsMoney = 0.0M;
 
             //This will check if the input of the user is possible according to
@@ -262,33 +256,28 @@ namespace LuxoftCodeChallenge
         /// It asks the user if there are more clients, if there are, the payment cycle will repeat.
         /// If there are no more clients it will stop the app.
         /// </summary>
-        /// <param name="flag">Boolean that controls the process of the whole application. If it is set to false the applicatino will stop.</param>
-        /// <param name="secondFlag">Boolean that will not let you go to any other process of the application until you enter a valid input.</param>
-        public static void ShopAgain(ref bool flag, ref bool secondFlag)
+        public static bool ShopAgain()
         {
-            while (secondFlag)
+            Console.WriteLine("Thank you for shopping with us.");
+            Console.WriteLine("\nIs there a new client? Yes: 1  No: 0");
+            do
             {
                 try
                 {
                     int newClient = int.Parse(Console.ReadLine());
                     if (newClient == 1)
                     {
-                        secondFlag = false;
+                        return true;
                     }
-                    else
+
+                    if (newClient == 0)
                     {
-                        if (newClient == 0)
-                        {
-                            flag = false;
-                            secondFlag = false;
-                            Console.WriteLine("\nThank you for using CASH Masters's (P.O.S), have a nice day.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nPlease input a valid response");
-                            Console.WriteLine("Is there a new client? Yes: 1  No: 0");
-                        }
+                        Console.WriteLine("\nThank you for using CASH Masters's (P.O.S), have a nice day.");
+                        return false;
                     }
+
+                    Console.WriteLine("\nPlease input a valid response");
+                    Console.WriteLine("Is there a new client? Yes: 1  No: 0");
                 }
                 catch (FormatException)
                 {
@@ -296,6 +285,7 @@ namespace LuxoftCodeChallenge
                     Console.WriteLine("Is there a new client? Yes: 1  No: 0");
                 }
             }
+            while (true);
         }
     }
 }
